@@ -7,7 +7,7 @@ deploy:
   provider: npm
   email: nessthehero@gmail.com
   api_key:
-    secure: iSXsx0lctUfxVvwxTdpcYlo/QLIDmky6zC3ZeE5Gi/XHFwDLidC4iM0rOpnTgcS83Wt+xkAZ9GwvKi5XpQARSspeaDnvwOQxUTCOeTSuYiepfDbuEtqSFdD6k85PH4EeqJpr0eeZ1Is1E1PT1pLDfLEG+AS/AeCqX1FIPGzG478=
+    secure: RPTpHbB6RgQRGpu3Qq9n1YQWoK8Wolb3eckX0Ej8lMIGHz3S1/yd/ksQQIEdtP59j0s5f3OPi2VAp/VJbLwWGhr+NMFvN0gfbCl48xglv+f7sQmSgsV/fHDss3N2B5yGwBk+EPdGSQzari0cVqyWsDgLmrst83onkPOrlXiQat4=
   on:
     tags: true
     repo: BarkleyREI/brei-assemble-helpers
