@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- 5.12.0
+- 6.10.1
+- 7.8.0
+deploy:
+  provider: npm
+  email: nessthehero@gmail.com
+  api_key:
+    secure: RPTpHbB6RgQRGpu3Qq9n1YQWoK8Wolb3eckX0Ej8lMIGHz3S1/yd/ksQQIEdtP59j0s5f3OPi2VAp/VJbLwWGhr+NMFvN0gfbCl48xglv+f7sQmSgsV/fHDss3N2B5yGwBk+EPdGSQzari0cVqyWsDgLmrst83onkPOrlXiQat4=
+  on:
+    tags: true
+    repo: BarkleyREI/brei-assemble-helpers
