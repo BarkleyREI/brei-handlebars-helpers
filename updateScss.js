@@ -5,23 +5,26 @@ var collection = [
 	{
 		'name': 'partials',
 		'searchName': 'partials',
-		'dir': './app/assemble/partials'
+		'dir': './app/assemble/partials',
+		'recursive': true
 	},
 	{
 		'name': 'modules',
 		'searchName': 'modules',
-		'dir': './app/assemble/modules'
+		'dir': './app/assemble/modules',
+		'recursive': true
 	},
 	{
 		'name': 'templates',
 		'searchName': 'assemble',
-		'dir': './app/assemble'
+		'dir': './app/assemble/.',
+		'recursive': false
 	}
 ];
 
 collection.forEach(function(data) {
 
-	nodeDir.files(data.dir, function(err, files) {
+	nodeDir.files(data.dir, 'all', function(err, files) {
 		var names = [];
 		var finalScssFile = '';
 		var finalPath = './app/sass/' + data.name + '/_assemble-' + data.name +'.scss';
@@ -32,7 +35,7 @@ collection.forEach(function(data) {
 
 		console.log('Updating Assemble.io ' + data.name + ' sass...');
 
-		files.forEach(function(entry) {
+		files.files.forEach(function(entry) {
 
 			if (path.extname(entry) === '.hbs') {
 				// Add names to be added to .scss file
@@ -78,6 +81,8 @@ collection.forEach(function(data) {
 			console.log('Done! ' + data.name + ' updated!');
 		});
 
+	}, {
+		recursive: data.recursive
 	});
 });
 
