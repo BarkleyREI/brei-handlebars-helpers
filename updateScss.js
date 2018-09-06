@@ -22,6 +22,21 @@ var collection = [
 	}
 ];
 
+/*
+
+This script runs through each directory in the collection object above and generates an appropriate .scss file in the
+respective directory under /app/scss/.
+
+The recursive parameter is important. It is set to false on templates so that the templates folder isn't filled with
+all the sass files for partials and modules.
+
+Ideas for the future for this include:
+- Scanning the handlebars files for a flag that prevents a sass file from being generated.
+- Scanning for a flag that determines a different composite sass file for the intention of including in a different
+	master css file other than main.css (for example, level.css) https://github.com/BarkleyREI/generator-brei-app/issues/64
+
+ */
+
 collection.forEach(function(data) {
 
 	nodeDir.files(data.dir, 'all', function(err, files) {
