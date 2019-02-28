@@ -1,6 +1,6 @@
 {
 	"name": "brei-assemble-helpers",
-	"version": "1.3.1",
+	"version": "2.0.0",
 	"description": "BarkleyREI custom handlebar helpers",
 	"main": "helpers.js",
 	"scripts": {
