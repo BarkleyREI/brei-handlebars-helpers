@@ -1,7 +1,8 @@
-var fs = require('fs');
-var path = require('path');
-var nodeDir = require('node-dir');
-var collection = [
+const fs = require('fs');
+const path = require('path');
+const nodeDir = require('node-dir');
+const _ = require('lodash');
+const collection = [
 	{
 		'name': 'partials',
 		'searchName': 'partials',
@@ -22,6 +23,14 @@ var collection = [
 	}
 ];
 
+const ignored = [
+	'.git',
+	'node_modules',
+	'.DS_Store',
+	'thumbs.db',
+	'Thumbs.db'
+];
+
 /*
 
 This script runs through each directory in the collection object above and generates an appropriate .scss file in the
@@ -37,110 +46,127 @@ Ideas for the future for this include:
 
  */
 
-collection.forEach(function(data) {
+collection.forEach(function (data) {
 
-	nodeDir.files(data.dir, 'all', function(err, files) {
-		var names = [];
-		var finalScssFile = '';
-		var finalPath = './app/sass/' + data.name + '/_assemble-' + data.name +'.scss';
+	let ff = fs.readdirSync(data.dir);
 
-		if (err) {
-			throw err;
+	ff = _.difference(ff, ignored);
+
+	ff = ff.filter(hbs => hbs.indexOf('.hbs') !== -1);
+
+	var names = [];
+	var finalScssFile = '';
+	var finalPath = './app/scss/' + data.name + '/_assemble-' + data.name + '.scss';
+
+	ff.forEach(function (entry) {
+		// Add names to be added to .scss file
+		var regex = new RegExp('^.+' + data.searchName + '/');
+
+		if (!/^_+/.test(entry)/* && data.name !== 'templates'*/) {
+			entry = '_' + entry;
 		}
 
-		console.log('Updating Assemble.io ' + data.name + ' sass...');
-
-		files.files.forEach(function(entry) {
-
-			if (path.extname(entry) === '.hbs') {
-				// Add names to be added to .scss file
-				var regex = new RegExp('^.+' + data.searchName + '/');
-				var name = path.basename(entry, '.hbs');
-
-				if (!/^_+/.test(name)/* && data.name !== 'templates'*/) {
-					name = '_' + name;
-				}
-
-				entry = entry.replace(regex, '');
-				entry = entry.split('/');
-				entry[entry.length - 1] = name;
-
-				if (data.name === 'templates') {
-					if (entry.length === 1 && entry[0] !== 'index') {
-						names.push(entry);
-						writeMissingFiles(data, entry);
-					}
-				} else {
-					entry = entry.join('/');
-					names.push(entry);
-					writeMissingFiles(data, entry);
-				}
+		if (data.name === 'templates') {
+			if (entry !== '_index.hbs') {
+				names.push(entry);
 			}
-		});
+		} else {
+			names.push(entry);
+		}
+	});
 
-		names.forEach(function(name) {
+	names.sort();
+
+	let rmf = writeMissingFiles(data, names);
+
+	rmf.then(function () {
+
+		names.forEach(function (name) {
 			var importPath = '@import \'';
+
+			name = name.replace('.hbs', '');
 
 			importPath = importPath + name;
 			finalScssFile = finalScssFile + importPath + '\';\n';
 		});
 
-		// console.log(finalPath, finalScssFile);
+		if (finalScssFile !== '') {
 
-		if (finalScssFile == '') {
-			console.log('file is empty!!!');
+			fs.writeFileSync(finalPath, finalScssFile, function (err) {
+				if (err) {
+					throw err;
+				}
+			});
+
 		}
-		fs.writeFile(finalPath, finalScssFile, function(err) {
-			if (err) { throw err; }
 
-			console.log('Done! ' + data.name + ' updated!');
-		});
-
-	}, {
-		recursive: data.recursive
 	});
 });
 
 // Check to see if same name .scss file exists. If not, create one
-var writeMissingFiles = function(data, entry) {
+function writeMissingFiles(data, names) {
 
 	// console.log("\n====\nwriteMissingFiles()\n\n" + data + "\n" + entry + "\n====\n");
 
-	var name = entry;
-	var filename = data.name + '/' + name +'.scss'
-	var readPath = './app/sass/' + filename;
-	fs.readFile(readPath, 'utf8', function(err, file) {
+	// var name = entry.replace('.hbs', '');
+	// var filename = data.name + '/' + name + '.scss';
+	// var readPath = './app/scss/' + filename;
 
-		// console.log("reading file " + readPath);
+	let fle = fs.readdirSync('./app/scss/' + data.name);
 
-		if (err) {
-			console.log('\n\nA SASS file doesnt exist. Creating ' + filename + ' for you.\n');
-		}
+	const exclu = [
+		'_assemble-modules.scss',
+		'_assemble-partials.scss',
+		'_assemble-templates.scss'
+	];
 
-		if (!file && name != null && typeof name !== 'undefined') {
+	fle = _.difference(fle, exclu);
+	fle = _.difference(fle, ignored);
 
-			// console.log('checking name: ', name, typeof name, name.length);
+	fle = fle.map(item => item.replace('.scss', ''));
+	names = names.map(item => item.replace('.hbs', ''));
 
-			if (typeof name === "object") { name = name[0]; }
+	let diff = _.difference(names, fle);
 
-			var writePath = readPath;
-			var cleanName = name.replace('_', '');
+	return new Promise(function (resolve, reject) {
+
+		let errored = false;
+
+		diff.forEach(function (x) {
+
+			var cleanName = x.replace('_', '');
 			var content = '.' + cleanName + ' {\n\n}\n';
-
-			// console.log('== no file contents ==');
+			var filename = x + '.scss';
 
 			if (cleanName.length >= 1) {
-				fs.writeFile(writePath, content, function(err) {
+				fs.writeFile('./app/scss/' + data.name + '/' + filename, content, function (err) {
 
 					if (err) {
-						throw err;
+						errored = err;
 					}
 
-					console.log('\nI just wrote ' + filename + ' for you!\n');
+					console.log(properName(data.name) + ' not found. Creating ' + filename);
 
 				});
 			}
 
+		});
+
+		if (errored) {
+			reject(errored);
+		} else {
+			resolve();
 		}
+
 	});
+
 };
+
+function singular(str) {
+	return str.replace(/s$/, '');
+}
+
+function properName(str) {
+	let name = str[0].toUpperCase() + str.substring(1);
+	return singular(name);
+}
