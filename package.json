@@ -4,7 +4,8 @@
 	"description": "BarkleyREI custom handlebar helpers",
 	"main": "helpers.js",
 	"scripts": {
-		"test": "mocha"
+		"test": "mocha",
+		"postinstall": "npm test"
 	},
 	"repository": {
 		"type": "git",

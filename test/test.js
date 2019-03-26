@@ -2,7 +2,9 @@
 
 'use strict';
 
-const util = require('brei-util');
+// const util = require('brei-util');
+const util = require('../../brei-util/index.js');
+const u = require('util');
 
 const root = __dirname + '/..';
 
@@ -34,6 +36,12 @@ describe('Verify file and folder structure', function () {
 		let ttree = util.tree(root);
 
 		let files = util.ftree(ttree);
+
+		console.log('\n------- files --------\n');
+		console.log(u.inspect(files, false, null));
+
+		console.log('\n------- valid --------\n');
+		console.log(u.inspect(valid, false, null));
 
 		util.assert(util.deep(valid, files));
 
