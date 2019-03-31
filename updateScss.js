@@ -1,6 +1,6 @@
+'use strict';
+
 const fs = require('fs');
-const path = require('path');
-const nodeDir = require('node-dir');
 const _ = require('lodash');
 const collection = [
 	{
