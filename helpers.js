@@ -19,10 +19,17 @@ module.exports = {
 	},
 
 	// Pass in the name of the JSON fixture file in assemble/fixtures for scope
-	parseFixture: (path, options) => {
+	parseFixture: (path, ctx, options) => {
 
 		if (!path || typeof path !== 'string') {
 			return false;
+		}
+
+		// ctx is the context of data of the partial this helper is called from. If it is missing,
+		// just set the options parameter to ctx, since assemble auto assigns the last parameter to options.
+		if (!options || typeof options === 'undefined') {
+			options = ctx;
+			ctx = Object.assign({}, options.hash); // If you pass hashed values along with the helper, they get placed in the hash value of options, instead of being set to ctx.
 		}
 
 		let fixture;
@@ -36,6 +43,19 @@ module.exports = {
 		} catch (err) {
 			return console.error(err);
 		}
+
+		// Merge the context data into the fixture's data by finding the diff between it and the root data.
+		let rootData = options.data.root;
+
+		let diff = Object.keys(ctx).reduce((diff, key) => {
+			if (rootData[key] === ctx[key]) return diff
+			return {
+				...diff,
+				[key]: ctx[key]
+			}
+		}, {});
+
+		fixture = Object.assign(fixture, diff);
 
 		return options.fn(fixture);
 
