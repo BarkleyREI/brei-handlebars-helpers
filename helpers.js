@@ -205,10 +205,10 @@ module.exports = {
 			.replace('.hbs', '.html');
 
 	},
-	formatIndexModuleUrl: function (module) {
+	formatIndexComponentUrl: function (organism) {
 
-		return module.key
-			.replace(module._base, '/modules')
+		return organism.key
+			.replace(organism._base, '/components')
 			.replace('.hbs', '.html');
 
 	}
