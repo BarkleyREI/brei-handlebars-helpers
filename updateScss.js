@@ -4,15 +4,21 @@ const fs = require('fs');
 const _ = require('lodash');
 const collection = [
 	{
-		'name': 'partials',
-		'searchName': 'partials',
-		'dir': './app/assemble/partials',
+		'name': 'atoms',
+		'searchName': 'atoms',
+		'dir': './app/assemble/atoms',
 		'recursive': true
 	},
 	{
-		'name': 'modules',
-		'searchName': 'modules',
-		'dir': './app/assemble/modules',
+		'name': 'molecules',
+		'searchName': 'molecules',
+		'dir': './app/assemble/molecules',
+		'recursive': true
+	},
+	{
+		'name': 'organisms',
+		'searchName': 'organisms',
+		'dir': './app/assemble/organisms',
 		'recursive': true
 	},
 	{
@@ -37,7 +43,7 @@ This script runs through each directory in the collection object above and gener
 respective directory under /app/scss/.
 
 The recursive parameter is important. It is set to false on templates so that the templates folder isn't filled with
-all the sass files for partials and modules.
+all the sass files for molecules and organisms.
 
 Ideas for the future for this include:
 - Scanning the handlebars files for a flag that prevents a sass file from being generated.
@@ -115,8 +121,8 @@ function writeMissingFiles(data, names) {
 	let fle = fs.readdirSync('./app/scss/' + data.name);
 
 	const exclu = [
-		'_assemble-modules.scss',
-		'_assemble-partials.scss',
+		'_assemble-organisms.scss',
+		'_assemble-molecules.scss',
 		'_assemble-templates.scss'
 	];
 
