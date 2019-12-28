@@ -1,19 +1,39 @@
 {
-  "name": "brei-assemble-helpers",
-  "version": "1.0.3",
-  "description": "custom-handlebar-helpers",
-  "main": "helpers.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified. MAKE THEM!\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BarkleyREI/brei-assemble-helpers"
-  },
-  "author": "Joseph Dillon",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/BarkleyREI/brei-assemble-helpers/issues"
-  },
-  "homepage": "https://github.com/BarkleyREI/brei-assemble-helpers"
+	"name": "brei-assemble-helpers",
+	"version": "2.0.2",
+	"description": "BarkleyREI custom handlebar helpers",
+	"main": "helpers.js",
+	"scripts": {
+		"test": "mocha",
+		"postinstall": "npm test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/BarkleyREI/brei-assemble-helpers"
+	},
+	"author": "Joseph Dillon",
+	"contributors": [
+		{
+			"name": "Ian Moffitt",
+			"email": "nessthehero@gmail.com",
+			"url": "https://github.com/nessthehero"
+		},
+		{
+			"name": "Joseph Dillon",
+			"url": "https://github.com/jdillon522"
+		},
+		{
+			"name": "Sarah Harissis",
+			"url": "https://github.com/sharissis-brei"
+		}
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/BarkleyREI/brei-assemble-helpers/issues"
+	},
+	"homepage": "https://github.com/BarkleyREI/brei-assemble-helpers",
+	"devDependencies": {
+		"brei-util": "^1.0.1",
+		"mocha": "~6.2.2"
+	}
 }
