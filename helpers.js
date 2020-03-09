@@ -8,7 +8,7 @@ let isValidString = (string) => typeof string !== 'undefined' && string !== '';
 
 module.exports = {
 
-	replaceStr: (haystack, needle, replacement) => {
+	replaceStr(haystack, needle, replacement) {
 
 		if (haystack && needle) {
 			return haystack.replace(needle, replacement);
@@ -19,7 +19,7 @@ module.exports = {
 	},
 
 	// Pass in the name of the JSON fixture file in assemble/fixtures for scope
-	parseFixture: (path, ctx, options) => {
+	parseFixture(path, ctx, options) {
 
 		if (!path || typeof path !== 'string') {
 			return false;
@@ -61,9 +61,11 @@ module.exports = {
 
 	},
 
-	log: (data) => console.log(data),
+	log(data) {
+		console.log(data);
+	},
 
-	stringCompare: (a, b, opts) => {
+	stringCompare(a, b, opts) {
 
 		if (a === b) {
 			return opts.fn(this);
@@ -73,9 +75,11 @@ module.exports = {
 
 	},
 
-	toLowerCase: (str) => str.toLowerCase(),
+	toLowerCase(str) {
+		str.toLowerCase();
+	},
 
-	math: (lvalue, operator, rvalue, options) => {
+	math(lvalue, operator, rvalue, options) {
 
 		lvalue = parseFloat(lvalue);
 		rvalue = parseFloat(rvalue);
@@ -90,7 +94,7 @@ module.exports = {
 
 	},
 
-	ifOr: (a, b, opts) => {
+	ifOr(a, b, opts) {
 
 		if (a || b) {
 			return opts.fn(this);
@@ -100,7 +104,7 @@ module.exports = {
 
 	},
 
-	ifAnd: (a, b, opts) => {
+	ifAnd(a, b, opts) {
 
 		if (a && b) {
 			return opts.fn(this);
@@ -110,9 +114,17 @@ module.exports = {
 
 	},
 
-	svg: (name) => new Handlebars.SafeString('<svg class="brei-icon brei-icon-' + name + '"><use xlink:href="#brei-icon-' + name + '"></use></svg>'),
+	svg(name) {
+		const tmpl = `
+			<svg class="icon icon-${name}">
+				<use xlink:href="#icon-${name}"></use>
+			</svg>
+		`;
 
-	link: (link) => {
+		return new Handlebars.SafeString(tmpl);
+	},
+
+	link(link) {
 
 		let url = (isValidString(link.url)) ? link.url : '#';
 		let icon = (isValidString(link.icon)) ? '{{svg "' + link.icon + '"}}' : '';
@@ -133,7 +145,7 @@ module.exports = {
 
 	},
 
-	socialMediaLink: (socialMediaLink) => {
+	socialMediaLink(socialMediaLink) {
 
 		let url = (isValidString(socialMediaLink.url)) ? socialMediaLink.url : '#';
 		let icon = (isValidString(socialMediaLink.icon)) ? '{{svg "' + socialMediaLink.icon + '"}}' : '';
@@ -154,7 +166,7 @@ module.exports = {
 
 	},
 
-	backgroundImage: (backgroundImage) => {
+	backgroundImage(backgroundImage) {
 
 		let url = (isValidString(backgroundImage.url)) ? backgroundImage.url : '#';
 		let alt = (isValidString(backgroundImage.alt)) ? backgroundImage.alt : '';
@@ -173,7 +185,7 @@ module.exports = {
 
 	},
 
-	placeholderImage: (w, h, text) => {
+	placeholderImage(w, h, text) {
 
 		let width = (isValidString(w)) ? w : '300';
 		let height = (isValidString(h)) ? 'x' + h : '';
@@ -185,7 +197,7 @@ module.exports = {
 	},
 
 	// Type can be short, medium, or long
-	placeholderText: (type) => {
+	placeholderText(type) {
 
 		let placeholderTextString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 
@@ -198,14 +210,16 @@ module.exports = {
 		return new Handlebars.SafeString(placeholderTextString);
 
 	},
-	formatIndexPageUrl: function (page) {
+
+	formatIndexPageUrl(page) {
 
 		return page.data.path
 			.replace(page.data.base, '')
 			.replace('.hbs', '.html');
 
 	},
-	formatIndexComponentUrl: function (organism) {
+
+	formatIndexComponentUrl(organism) {
 
 		return organism.key
 			.replace(organism._base, '/components')
