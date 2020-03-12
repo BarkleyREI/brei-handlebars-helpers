@@ -1,6 +1,6 @@
 {
 	"name": "brei-assemble-helpers",
-	"version": "2.0.2",
+	"version": "2.0.4",
 	"description": "BarkleyREI custom handlebar helpers",
 	"main": "helpers.js",
 	"scripts": {
@@ -34,6 +34,6 @@
 	"homepage": "https://github.com/BarkleyREI/brei-assemble-helpers",
 	"devDependencies": {
 		"brei-util": "^1.0.1",
-		"mocha": "~6.2.2"
+		"mocha": "~7.1.0"
 	}
 }
