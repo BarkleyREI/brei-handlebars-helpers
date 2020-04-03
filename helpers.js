@@ -8,6 +8,29 @@ let isValidString = (string) => typeof string !== 'undefined' && string !== '';
 
 module.exports = {
 
+	putInclude(options) {
+	
+		let r = '';
+		
+		if (arguments.length > 1) {
+
+			let args = Object.values(arguments);
+
+			// Discard options object
+			args.pop();
+
+			if (args.length > 0) {
+
+				r = '_' + args.join('-');
+
+			}
+			
+		}
+
+		return r;
+		
+	},
+
 	replaceStr(haystack, needle, replacement) {
 
 		if (haystack && needle) {
