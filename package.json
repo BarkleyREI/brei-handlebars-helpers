@@ -1,6 +1,6 @@
 {
 	"name": "brei-assemble-helpers",
-	"version": "2.0.4",
+	"version": "2.0.5",
 	"description": "BarkleyREI custom handlebar helpers",
 	"main": "helpers.js",
 	"scripts": {
@@ -25,6 +25,10 @@
 		{
 			"name": "Sarah Harissis",
 			"url": "https://github.com/sharissis-brei"
+		},
+		{
+			"name": "Sean Stacho",
+			"url": "https://github.com/Sean-BREI"
 		}
 	],
 	"license": "MIT",
