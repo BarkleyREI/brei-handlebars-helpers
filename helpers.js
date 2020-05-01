@@ -9,9 +9,9 @@ let isValidString = (string) => typeof string !== 'undefined' && string !== '';
 module.exports = {
 
 	putInclude(options) {
-	
+
 		let r = '';
-		
+
 		if (arguments.length > 1) {
 
 			let args = Object.values(arguments);
@@ -24,11 +24,11 @@ module.exports = {
 				r = '_' + args.join('-');
 
 			}
-			
+
 		}
 
 		return r;
-		
+
 	},
 
 	replaceStr(haystack, needle, replacement) {
@@ -139,7 +139,7 @@ module.exports = {
 
 	svg(name) {
 		const tmpl = `
-			<svg class="icon icon-${name}">
+			<svg class="icon icon-${name}" focusable=”false”>
 				<use xlink:href="#icon-${name}"></use>
 			</svg>
 		`;
