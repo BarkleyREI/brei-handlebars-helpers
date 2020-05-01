@@ -1,16 +1,17 @@
 language: node_js
 node_js:
-  - '10'
-  - '11'
-  - '12'
-  - '13'
-  - 'lts/*'
-  - 'node'
+- '10'
+- '11'
+- '12'
+- '13'
+- lts/*
+- node
 deploy:
   provider: npm
   email: nessthehero@gmail.com
   api_key:
-    secure: RPTpHbB6RgQRGpu3Qq9n1YQWoK8Wolb3eckX0Ej8lMIGHz3S1/yd/ksQQIEdtP59j0s5f3OPi2VAp/VJbLwWGhr+NMFvN0gfbCl48xglv+f7sQmSgsV/fHDss3N2B5yGwBk+EPdGSQzari0cVqyWsDgLmrst83onkPOrlXiQat4=
+    secure: BWNvU9WOVv+clSSCTTqoYG8kJOnFQJz7pXpAXHJT77pt8haHNlM0srH5Y5fjhVa6OWkhuIA8tCLFXodt6w67dnqNzTQlmlDkd6dH6Z9xc1PISCkLAKleLP/0NHbD6QfdEtK8s/lxKUmxAoVvNxKUrjSzk0/ftIJJKroGqXaqGAE=
   on:
     tags: true
     repo: BarkleyREI/brei-assemble-helpers
+  skip_cleanup: 'true'
