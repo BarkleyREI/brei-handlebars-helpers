@@ -13,5 +13,5 @@ deploy:
     secure: BWNvU9WOVv+clSSCTTqoYG8kJOnFQJz7pXpAXHJT77pt8haHNlM0srH5Y5fjhVa6OWkhuIA8tCLFXodt6w67dnqNzTQlmlDkd6dH6Z9xc1PISCkLAKleLP/0NHbD6QfdEtK8s/lxKUmxAoVvNxKUrjSzk0/ftIJJKroGqXaqGAE=
   on:
     tags: true
-    repo: BarkleyREI/brei-assemble-helpers
+    repo: BarkleyREI/brei-handlebars-helpers
   skip_cleanup: 'true'

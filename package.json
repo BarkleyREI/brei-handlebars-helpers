@@ -1,5 +1,5 @@
 {
-	"name": "brei-assemble-helpers",
+	"name": "brei-handlebars-helpers",
 	"version": "2.0.6",
 	"description": "BarkleyREI custom handlebar helpers",
 	"main": "helpers.js",
@@ -9,7 +9,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/BarkleyREI/brei-assemble-helpers"
+		"url": "https://github.com/BarkleyREI/brei-handlebars-helpers"
 	},
 	"author": "Joseph Dillon",
 	"contributors": [
@@ -33,9 +33,9 @@
 	],
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/BarkleyREI/brei-assemble-helpers/issues"
+		"url": "https://github.com/BarkleyREI/brei-handlebars-helpers/issues"
 	},
-	"homepage": "https://github.com/BarkleyREI/brei-assemble-helpers",
+	"homepage": "https://github.com/BarkleyREI/brei-handlebars-helpers",
 	"devDependencies": {
 		"brei-util": "^1.0.1",
 		"mocha": "~7.1.0"
