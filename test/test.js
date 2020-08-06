@@ -4,7 +4,7 @@
 
 const util = require('brei-util');
 
-describe('brei-assemble-helpers -- Test (test/test.js)', function () {
+describe('brei-handlebars-helpers -- Test (test/test.js)', function () {
 	it('Empty test', function () {
 		util.assert(true);
 	});
