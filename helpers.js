@@ -8,6 +8,33 @@ let isValidString = (string) => typeof string !== 'undefined' && string !== '';
 
 module.exports = {
 
+	json(obj) {
+		return JSON.stringify(obj);
+	},
+
+	scriptPath: function (options) {
+
+		let r = '';
+
+		if (arguments.length > 1) {
+
+			let args = Object.values(arguments);
+
+			// Discard options object
+			args.pop();
+
+			if (args.length > 0) {
+
+				r = args.join('-');
+
+			}
+
+		}
+
+		return '/js/' + r + '.js';
+
+	},
+
 	putInclude(options) {
 
 		let r = '';
@@ -248,6 +275,10 @@ module.exports = {
 			.replace(organism._base, '/components')
 			.replace('.hbs', '.html');
 
+	},
+
+	inc(value, options) {
+		return parseInt(value) + 1;
 	}
 
 };
