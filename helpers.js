@@ -166,7 +166,7 @@ module.exports = {
 
 	svg(name) {
 		const tmpl = `
-			<svg class="icon icon-${name}" focusable=”false”>
+			<svg class="icon icon-${name}" focusable="false">
 				<use xlink:href="#icon-${name}"></use>
 			</svg>
 		`;
