@@ -3,6 +3,7 @@
 const fs = require('fs');
 const nodePath = require('path');
 const Handlebars = require('handlebars');
+const fractal = require('../../fractal.config');
 
 let isValidString = (string) => typeof string !== 'undefined' && string !== '';
 
@@ -98,11 +99,11 @@ module.exports = {
 		let rootData = options.data.root;
 
 		let diff = Object.keys(ctx).reduce((diff, key) => {
-			if (rootData[key] === ctx[key]) return diff
+			if (rootData[key] === ctx[key]) return diff;
 			return {
 				...diff,
 				[key]: ctx[key]
-			}
+			};
 		}, {});
 
 		fixture = Object.assign(fixture, diff);
@@ -164,14 +165,20 @@ module.exports = {
 
 	},
 
-	svg(name) {
+	svg(name, _svgClass) {
+
+		if (!_svgClass || typeof _svgClass !== 'string') {
+			_svgClass = fractal._config.project.svgClass;
+		}
+
 		const tmpl = `
-			<svg class="icon icon-${name}" focusable="false">
-				<use xlink:href="#icon-${name}"></use>
+			<svg class="${_svgClass} ${_svgClass}-${name}" focusable="false">
+				<use xlink:href="#${_svgClass}-${name}"></use>
 			</svg>
 		`;
 
 		return new Handlebars.SafeString(tmpl);
+
 	},
 
 	link(link) {
@@ -242,7 +249,7 @@ module.exports = {
 		let caption = (isValidString(text)) ? '?text=' + encodeURI(text) : '';
 		let url = 'http://via.placeholder.com/' + width + height + caption;
 
-		return new Handlebars.SafeString('<img src="' + url + '" alt="Placeholder Image" />')
+		return new Handlebars.SafeString('<img src="' + url + '" alt="Placeholder Image" />');
 
 	},
 
@@ -279,6 +286,28 @@ module.exports = {
 
 	inc(value, options) {
 		return parseInt(value) + 1;
+	},
+
+	concat(a, b) {
+		return a + b;
+	},
+
+	l(url) {
+
+		let urlPath = url;
+
+		if (url.includes('fractal:')) {
+			url = url.replace('fractal:', '');
+			let parts = url.split('/');
+			let ext = '';
+			if (!fractal._config.project.is_server) {
+				ext = '.html';
+			}
+			return new Handlebars.SafeString(`/components/${parts[1]}/${parts[0]}${ext}`);
+		}
+
+		return new Handlebars.SafeString(urlPath);
+
 	}
 
 };
