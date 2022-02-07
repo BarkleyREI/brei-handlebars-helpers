@@ -3,7 +3,7 @@
 const fs = require('fs');
 const nodePath = require('path');
 const Handlebars = require('handlebars');
-const fractal = require('../../fractal.config');
+const fractal = require('../../fractal.config.js');
 
 let isValidString = (string) => typeof string !== 'undefined' && string !== '';
 
