@@ -37,7 +37,7 @@
 	},
 	"homepage": "https://github.com/BarkleyREI/brei-handlebars-helpers",
 	"devDependencies": {
-		"brei-util": "^1.0.9",
-		"mocha": "~9.2.0"
+		"mocha": "~9.2.0",
+		"handlebars": "~4.7.7"
 	}
 }

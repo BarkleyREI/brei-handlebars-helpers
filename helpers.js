@@ -22,8 +22,6 @@ let isValidString = (string) => typeof string !== 'undefined' && string !== '';
 
 module.exports = {
 
-	_fractal: fractal,
-
 	json(obj) {
 		return JSON.stringify(obj);
 	},
