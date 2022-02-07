@@ -4,11 +4,17 @@ const fs = require('fs');
 const nodePath = require('path');
 const Handlebars = require('handlebars');
 
-const fractal = require(nodePath.join(__dirname, '../../fractal.config.js'));
+let fractal = {};
+
+if (fs.existsSync(nodePath.join(__dirname, '../../fractal.config.js'))) {
+	fractal = require(nodePath.join(__dirname, '../../fractal.config.js'));
+}
 
 let isValidString = (string) => typeof string !== 'undefined' && string !== '';
 
 module.exports = {
+
+	_fractal: fractal,
 
 	json(obj) {
 		return JSON.stringify(obj);
