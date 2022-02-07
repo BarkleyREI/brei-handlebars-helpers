@@ -4,7 +4,15 @@ const fs = require('fs');
 const nodePath = require('path');
 const Handlebars = require('handlebars');
 
-let fractal = {};
+// Provide fractal object defaults to support older or otherwise non-fractal projects
+let fractal = {
+	'config': {
+		'project': {
+			'is_server': false,
+			'svgClass': 'brei-icon'
+		}
+	}
+};
 
 if (fs.existsSync(nodePath.join(__dirname, '../../fractal.config.js'))) {
 	fractal = require(nodePath.join(__dirname, '../../fractal.config.js'));
