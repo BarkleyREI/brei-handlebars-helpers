@@ -1,11 +1,11 @@
 {
 	"name": "brei-handlebars-helpers",
-	"version": "2.0.9",
+	"version": "2.1.0",
 	"description": "BarkleyREI custom handlebar helpers",
 	"main": "helpers.js",
 	"scripts": {
 		"test": "mocha",
-		"postinstall": "npm test"
+		"prepublishOnly": "npm test"
 	},
 	"repository": {
 		"type": "git",
@@ -36,8 +36,8 @@
 		"url": "https://github.com/BarkleyREI/brei-handlebars-helpers/issues"
 	},
 	"homepage": "https://github.com/BarkleyREI/brei-handlebars-helpers",
-	"dependencies": {
-		"brei-util": "^1.0.1",
-		"mocha": "~7.1.0"
+	"devDependencies": {
+		"brei-util": "^1.0.9",
+		"mocha": "~9.2.0"
 	}
 }
